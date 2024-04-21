@@ -11,6 +11,16 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <github.global.server>github</github.global.server>
+        <repository.directory>/Users/yennanliu/myRLock</repository.directory>
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>yennanliu</name>  <!-- 改 OWNER -->
+            <url>https://maven.pkg.github.com/yennanliu/myRLock</url>  <!-- 改 OWNER、REPOSITORY -->
+        </repository>
+    </distributionManagement>
 
 </project>
