@@ -25,3 +25,6 @@ replay_pid*
 
 # InetlliJ
 myRLock/.idea
+
+myRLock/target/
+myRLock/myRLock.iml
