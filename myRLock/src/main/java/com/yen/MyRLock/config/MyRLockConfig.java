@@ -4,7 +4,7 @@ package com.yen.MyRLock.config;
 public class MyRLockConfig {
 
     public static final String PREFIX = "spring.MyRLock";
-    
+
     //redisson
     private String address;
     private String password;
