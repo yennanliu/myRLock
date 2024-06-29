@@ -1,6 +1,8 @@
 package com.yen.MyRLock.model;
 
-/** Lock type */
+/**
+ * Lock type
+ */
 public enum LockType {
 
     /**

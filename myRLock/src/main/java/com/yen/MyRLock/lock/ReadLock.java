@@ -3,20 +3,17 @@ package com.yen.MyRLock.lock;
 import com.yen.MyRLock.model.LockInfo;
 import org.redisson.api.RReadWriteLock;
 import org.redisson.api.RedissonClient;
-//import org.springframework.boot.autoconfigure.klock.model.LockInfo;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-public class ReadLock implements Lock{
-
-    private  RReadWriteLock rLock;
+public class ReadLock implements Lock {
 
     private final LockInfo lockInfo;
+    private RReadWriteLock rLock;
+    private final RedissonClient redissonClient;
 
-    private RedissonClient redissonClient;
-
-    public ReadLock(RedissonClient redissonClient,LockInfo info) {
+    public ReadLock(RedissonClient redissonClient, LockInfo info) {
         this.redissonClient = redissonClient;
         this.lockInfo = info;
     }
@@ -24,7 +21,7 @@ public class ReadLock implements Lock{
     @Override
     public boolean acquire() {
         try {
-            rLock=redissonClient.getReadWriteLock(lockInfo.getName());
+            rLock = redissonClient.getReadWriteLock(lockInfo.getName());
             return rLock.readLock().tryLock(lockInfo.getWaitTime(), lockInfo.getLeaseTime(), TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             return false;
@@ -33,7 +30,7 @@ public class ReadLock implements Lock{
 
     @Override
     public boolean release() {
-        if(rLock.readLock().isHeldByCurrentThread()){
+        if (rLock.readLock().isHeldByCurrentThread()) {
             try {
                 return rLock.readLock().forceUnlockAsync().get();
             } catch (InterruptedException e) {

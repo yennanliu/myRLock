@@ -1,6 +1,6 @@
 package com.yen.MyRLock.handler.exception;
 
-public class MyRlockInvocationException extends RuntimeException{
+public class MyRlockInvocationException extends RuntimeException {
 
     public MyRlockInvocationException() {
     }

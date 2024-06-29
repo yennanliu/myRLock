@@ -5,7 +5,6 @@ import com.yen.MyRLock.model.LockInfo;
 
 /**
  * get lock timeout interface
- *
  */
 public interface LockTimeoutHandler {
 

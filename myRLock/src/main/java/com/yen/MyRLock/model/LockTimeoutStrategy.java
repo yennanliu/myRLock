@@ -3,8 +3,6 @@ package com.yen.MyRLock.model;
 import com.yen.MyRLock.handler.lock.LockTimeoutHandler;
 import com.yen.MyRLock.lock.Lock;
 
-import java.util.concurrent.TimeUnit;
-
 public enum LockTimeoutStrategy implements LockTimeoutHandler {
     ;
 

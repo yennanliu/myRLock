@@ -7,12 +7,12 @@ import org.slf4j.LoggerFactory;
 
 public class LockFactory {
 
-    Logger logger= LoggerFactory.getLogger(getClass());
+    Logger logger = LoggerFactory.getLogger(getClass());
 
     //@Autowired
     private RedissonClient redissonClient;
 
-    public Lock getLock(LockInfo lockInfo){
+    public Lock getLock(LockInfo lockInfo) {
         switch (lockInfo.getType()) {
             case Reentrant:
                 return new ReentrantLock(redissonClient, lockInfo);

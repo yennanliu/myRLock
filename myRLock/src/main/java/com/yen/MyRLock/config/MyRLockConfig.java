@@ -8,7 +8,7 @@ public class MyRLockConfig {
     //redisson
     private String address;
     private String password;
-    private int database=15;
+    private int database = 15;
     private ClusterServer clusterServer;
     private long waitTime = 60;
     private long leaseTime = 60;
@@ -61,7 +61,7 @@ public class MyRLockConfig {
         this.clusterServer = clusterServer;
     }
 
-    public static class ClusterServer{
+    public static class ClusterServer {
 
         private String[] nodeAddresses;
 

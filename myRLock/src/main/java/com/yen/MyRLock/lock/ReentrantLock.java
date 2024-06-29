@@ -3,23 +3,21 @@ package com.yen.MyRLock.lock;
 import com.yen.MyRLock.model.LockInfo;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-//import org.springframework.boot.autoconfigure.klock.model.LockInfo;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-public class ReentrantLock implements Lock{
-
-    private  RLock rLock;
+public class ReentrantLock implements Lock {
 
     private final LockInfo lockInfo;
+    private RLock rLock;
+    private final RedissonClient redissonClient;
 
-    private RedissonClient redissonClient;
-
-    public ReentrantLock(RedissonClient redissonClient,LockInfo lockInfo) {
+    public ReentrantLock(RedissonClient redissonClient, LockInfo lockInfo) {
         this.redissonClient = redissonClient;
         this.lockInfo = lockInfo;
     }
+
     @Override
     public boolean acquire() {
         try {
@@ -32,7 +30,7 @@ public class ReentrantLock implements Lock{
 
     @Override
     public boolean release() {
-        if(rLock.isHeldByCurrentThread()){
+        if (rLock.isHeldByCurrentThread()) {
             try {
                 return rLock.forceUnlockAsync().get();
             } catch (InterruptedException e) {
@@ -44,7 +42,7 @@ public class ReentrantLock implements Lock{
         return false;
     }
 
-    public String getKey(){
+    public String getKey() {
         return this.lockInfo.getName();
     }
 

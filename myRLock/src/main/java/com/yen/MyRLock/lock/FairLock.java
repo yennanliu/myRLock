@@ -7,15 +7,13 @@ import org.redisson.api.RedissonClient;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-public class FairLock implements Lock{
-
-    private RLock rLock;
+public class FairLock implements Lock {
 
     private final LockInfo lockInfo;
+    private RLock rLock;
+    private final RedissonClient redissonClient;
 
-    private RedissonClient redissonClient;
-
-    public FairLock(RedissonClient redissonClient,LockInfo info) {
+    public FairLock(RedissonClient redissonClient, LockInfo info) {
 
         this.redissonClient = redissonClient;
         this.lockInfo = info;
@@ -26,7 +24,7 @@ public class FairLock implements Lock{
     public boolean acquire() {
 
         try {
-            rLock=redissonClient.getFairLock(lockInfo.getName());
+            rLock = redissonClient.getFairLock(lockInfo.getName());
             return rLock.tryLock(lockInfo.getWaitTime(), lockInfo.getLeaseTime(), TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             return false;
@@ -36,7 +34,7 @@ public class FairLock implements Lock{
     @Override
     public boolean release() {
 
-        if(rLock.isHeldByCurrentThread()){
+        if (rLock.isHeldByCurrentThread()) {
 
             try {
                 return rLock.forceUnlockAsync().get();
