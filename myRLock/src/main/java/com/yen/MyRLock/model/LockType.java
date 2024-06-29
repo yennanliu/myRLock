@@ -1,31 +1,19 @@
 package com.yen.MyRLock.model;
 
-/**
- * Lock type
- */
+/** Lock type */
 public enum LockType {
 
-    /**
-     * Reentrant lock
-     */
-    Reentrant,
+  /** Reentrant lock */
+  Reentrant,
 
-    /**
-     * fair lock
-     */
-    Fair,
+  /** fair lock */
+  Fair,
 
-    /**
-     * read lock
-     */
-    Read,
+  /** read lock */
+  Read,
 
-    /**
-     * write lock
-     */
-    Write;
+  /** write lock */
+  Write;
 
-    LockType() {
-    }
-
+  LockType() {}
 }

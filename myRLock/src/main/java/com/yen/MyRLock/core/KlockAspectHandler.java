@@ -1,40 +1,40 @@
-//package com.yen.MyRLock.core;
+// package com.yen.MyRLock.core;
 //
-//import com.yen.MyRLock.lock.Lock;
-//import com.yen.MyRLock.lock.LockFactory;
-//import com.yen.MyRLock.model.LockInfo;
-//import org.aspectj.lang.JoinPoint;
-//import org.aspectj.lang.ProceedingJoinPoint;
-//import org.aspectj.lang.annotation.AfterReturning;
-//import org.aspectj.lang.annotation.AfterThrowing;
-//import org.aspectj.lang.annotation.Around;
-//import org.aspectj.lang.annotation.Aspect;
-//import org.aspectj.lang.reflect.MethodSignature;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//import org.springframework.beans.factory.annotation.Autowired;
-////import org.springframework.boot.autoconfigure.klock.annotation.Klock;
-////import org.springframework.boot.autoconfigure.klock.handler.KlockInvocationException;
-////import org.springframework.boot.autoconfigure.klock.lock.Lock;
-////import org.springframework.boot.autoconfigure.klock.lock.LockFactory;
-////import org.springframework.boot.autoconfigure.klock.model.LockInfo;
-//import org.springframework.core.annotation.Order;
-//import org.springframework.stereotype.Component;
-//import org.springframework.util.StringUtils;
+// import com.yen.MyRLock.lock.Lock;
+// import com.yen.MyRLock.lock.LockFactory;
+// import com.yen.MyRLock.model.LockInfo;
+// import org.aspectj.lang.JoinPoint;
+// import org.aspectj.lang.ProceedingJoinPoint;
+// import org.aspectj.lang.annotation.AfterReturning;
+// import org.aspectj.lang.annotation.AfterThrowing;
+// import org.aspectj.lang.annotation.Around;
+// import org.aspectj.lang.annotation.Aspect;
+// import org.aspectj.lang.reflect.MethodSignature;
+// import org.slf4j.Logger;
+// import org.slf4j.LoggerFactory;
+// import org.springframework.beans.factory.annotation.Autowired;
+//// import org.springframework.boot.autoconfigure.klock.annotation.Klock;
+//// import org.springframework.boot.autoconfigure.klock.handler.KlockInvocationException;
+//// import org.springframework.boot.autoconfigure.klock.lock.Lock;
+//// import org.springframework.boot.autoconfigure.klock.lock.LockFactory;
+//// import org.springframework.boot.autoconfigure.klock.model.LockInfo;
+// import org.springframework.core.annotation.Order;
+// import org.springframework.stereotype.Component;
+// import org.springframework.util.StringUtils;
 //
-//import java.lang.reflect.InvocationTargetException;
-//import java.lang.reflect.Method;
-//import java.util.Map;
-//import java.util.Objects;
-//import java.util.concurrent.ConcurrentHashMap;
+// import java.lang.reflect.InvocationTargetException;
+// import java.lang.reflect.Method;
+// import java.util.Map;
+// import java.util.Objects;
+// import java.util.concurrent.ConcurrentHashMap;
 //
-///**
+/// **
 // * Content :给添加@KLock切面加锁处理
 // */
-//@Aspect
-//@Component
-//@Order(0)
-//public class KlockAspectHandler {
+// @Aspect
+// @Component
+// @Order(0)
+// public class KlockAspectHandler {
 //
 //    private static final Logger logger = LoggerFactory.getLogger(KlockAspectHandler.class);
 //
@@ -96,17 +96,20 @@
 //    /**
 //     * 处理自定义加锁超时
 //     */
-//    private Object handleCustomLockTimeout(String lockTimeoutHandler, JoinPoint joinPoint) throws Throwable {
+//    private Object handleCustomLockTimeout(String lockTimeoutHandler, JoinPoint joinPoint) throws
+// Throwable {
 //
 //        // prepare invocation context
 //        Method currentMethod = ((MethodSignature)joinPoint.getSignature()).getMethod();
 //        Object target = joinPoint.getTarget();
 //        Method handleMethod = null;
 //        try {
-//            handleMethod = joinPoint.getTarget().getClass().getDeclaredMethod(lockTimeoutHandler, currentMethod.getParameterTypes());
+//            handleMethod = joinPoint.getTarget().getClass().getDeclaredMethod(lockTimeoutHandler,
+// currentMethod.getParameterTypes());
 //            handleMethod.setAccessible(true);
 //        } catch (NoSuchMethodException e) {
-//            throw new IllegalArgumentException("Illegal annotation param customLockTimeoutStrategy",e);
+//            throw new IllegalArgumentException("Illegal annotation param
+// customLockTimeoutStrategy",e);
 //        }
 //        Object[] args = joinPoint.getArgs();
 //
@@ -115,7 +118,8 @@
 //        try {
 //            res = handleMethod.invoke(target, args);
 //        } catch (IllegalAccessException e) {
-//            throw new KlockInvocationException("Fail to invoke custom lock timeout handler: " + lockTimeoutHandler ,e);
+//            throw new KlockInvocationException("Fail to invoke custom lock timeout handler: " +
+// lockTimeoutHandler ,e);
 //        } catch (InvocationTargetException e) {
 //            throw e.getTargetException();
 //        }
@@ -126,10 +130,13 @@
 //    /**
 //     *  释放锁
 //     */
-//    private void releaseLock(Klock klock, JoinPoint joinPoint,String curentLock) throws Throwable {
+//    private void releaseLock(Klock klock, JoinPoint joinPoint,String curentLock) throws Throwable
+// {
 //        LockRes lockRes = currentThreadLock.get(curentLock);
 //        if(Objects.isNull(lockRes)){
-//            throw new NullPointerException("Please check whether the input parameter used as the lock key value has been modified in the method, which will cause the acquire and release locks to have different key values and throw null pointers.curentLockKey:" + curentLock);
+//            throw new NullPointerException("Please check whether the input parameter used as the
+// lock key value has been modified in the method, which will cause the acquire and release locks to
+// have different key values and throw null pointers.curentLockKey:" + curentLock);
 //        }
 //        if (lockRes.getRes()) {
 //            boolean releaseRes = currentThreadLock.get(curentLock).getLock().release();
@@ -161,7 +168,8 @@
 //    /**
 //     *  处理释放锁时已超时
 //     */
-//    private void handleReleaseTimeout(Klock klock, LockInfo lockInfo, JoinPoint joinPoint) throws Throwable {
+//    private void handleReleaseTimeout(Klock klock, LockInfo lockInfo, JoinPoint joinPoint) throws
+// Throwable {
 //
 //        if(logger.isWarnEnabled()) {
 //            logger.warn("Timeout while release Lock({})", lockInfo.getName());
@@ -180,23 +188,28 @@
 //    /**
 //     * 处理自定义释放锁时已超时
 //     */
-//    private void handleCustomReleaseTimeout(String releaseTimeoutHandler, JoinPoint joinPoint) throws Throwable {
+//    private void handleCustomReleaseTimeout(String releaseTimeoutHandler, JoinPoint joinPoint)
+// throws Throwable {
 //
 //        Method currentMethod = ((MethodSignature)joinPoint.getSignature()).getMethod();
 //        Object target = joinPoint.getTarget();
 //        Method handleMethod = null;
 //        try {
-//            handleMethod = joinPoint.getTarget().getClass().getDeclaredMethod(releaseTimeoutHandler, currentMethod.getParameterTypes());
+//            handleMethod =
+// joinPoint.getTarget().getClass().getDeclaredMethod(releaseTimeoutHandler,
+// currentMethod.getParameterTypes());
 //            handleMethod.setAccessible(true);
 //        } catch (NoSuchMethodException e) {
-//            throw new IllegalArgumentException("Illegal annotation param customReleaseTimeoutStrategy",e);
+//            throw new IllegalArgumentException("Illegal annotation param
+// customReleaseTimeoutStrategy",e);
 //        }
 //        Object[] args = joinPoint.getArgs();
 //
 //        try {
 //            handleMethod.invoke(target, args);
 //        } catch (IllegalAccessException e) {
-//            throw new KlockInvocationException("Fail to invoke custom release timeout handler: " + releaseTimeoutHandler, e);
+//            throw new KlockInvocationException("Fail to invoke custom release timeout handler: " +
+// releaseTimeoutHandler, e);
 //        } catch (InvocationTargetException e) {
 //            throw e.getTargetException();
 //        }
@@ -239,4 +252,4 @@
 //    }
 //
 //
-//}
+// }

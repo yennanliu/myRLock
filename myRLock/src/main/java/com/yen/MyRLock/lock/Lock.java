@@ -1,12 +1,9 @@
 package com.yen.MyRLock.lock;
 
-
-/**
- * lock interface
- */
+/** lock interface */
 public interface Lock {
 
-    boolean acquire();
+  boolean acquire();
 
-    boolean release();
+  boolean release();
 }

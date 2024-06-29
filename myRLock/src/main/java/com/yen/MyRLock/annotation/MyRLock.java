@@ -14,73 +14,72 @@ import java.lang.annotation.Target;
 /**
  * public @interface MyRLock:
  *
- * This declares a new annotation type called MyRLock.
- * Annotations in Java are declared using the @interface keyword.
- * This annotation can then be applied to methods to provide additional information.
+ * <p>This declares a new annotation type called MyRLock. Annotations in Java are declared using
+ * the @interface keyword. This annotation can then be applied to methods to provide additional
+ * information.
  */
 public @interface MyRLock {
 
-    /**
-     * 锁的名称
-     *
-     * @return name
-     */
-    String name();
+  /**
+   * 锁的名称
+   *
+   * @return name
+   */
+  String name();
 
-    /**
-     * 锁类型，默认可重入锁
-     *
-     * @return lockType
-     */
-    LockType lockType();
+  /**
+   * 锁类型，默认可重入锁
+   *
+   * @return lockType
+   */
+  LockType lockType();
 
-    /**
-     * 尝试加锁，最多等待时间
-     *
-     * @return waitTime
-     */
-    long waitTime();
+  /**
+   * 尝试加锁，最多等待时间
+   *
+   * @return waitTime
+   */
+  long waitTime();
 
-    /**
-     * 上锁以后xxx秒自动解锁
-     *
-     * @return leaseTime
-     */
-    long leaseTime();
+  /**
+   * 上锁以后xxx秒自动解锁
+   *
+   * @return leaseTime
+   */
+  long leaseTime();
 
-    /**
-     * 自定义业务key
-     *
-     * @return keys
-     */
-    String[] keys();
+  /**
+   * 自定义业务key
+   *
+   * @return keys
+   */
+  String[] keys();
 
-    /**
-     * 加锁超时的处理策略
-     *
-     * @return lockTimeoutStrategy
-     */
-    LockTimeoutStrategy lockTimeoutStrategy();
+  /**
+   * 加锁超时的处理策略
+   *
+   * @return lockTimeoutStrategy
+   */
+  LockTimeoutStrategy lockTimeoutStrategy();
 
-    /**
-     * 自定义加锁超时的处理策略
-     *
-     * @return customLockTimeoutStrategy
-     */
-    String customLockTimeoutStrategy();
+  /**
+   * 自定义加锁超时的处理策略
+   *
+   * @return customLockTimeoutStrategy
+   */
+  String customLockTimeoutStrategy();
 
-    /**
-     * 释放锁时已超时的处理策略
-     *
-     * @return releaseTimeoutStrategy
-     */
-    ReleaseTimeoutStrategy releaseTimeoutStrategy();
+  /**
+   * 释放锁时已超时的处理策略
+   *
+   * @return releaseTimeoutStrategy
+   */
+  ReleaseTimeoutStrategy releaseTimeoutStrategy();
 
-    /**
-     * 自定义释放锁时已超时的处理策略
-     *
-     * @return customReleaseTimeoutStrategy
-     */
-    String customReleaseTimeoutStrategy();
-
+  /**
+   * 自定义释放锁时已超时的处理策略
+   *
+   * @return customReleaseTimeoutStrategy
+   */
+  String customReleaseTimeoutStrategy();
 }
