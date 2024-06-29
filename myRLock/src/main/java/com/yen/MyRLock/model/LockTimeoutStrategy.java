@@ -6,11 +6,12 @@ import com.yen.MyRLock.lock.Lock;
 import java.util.concurrent.TimeUnit;
 
 /**
- * adopt below code for java 8 syntax (modified by gpt)
+ * adopt below code (enum) for java 8 syntax (modified by gpt)
  *
  */
 public enum LockTimeoutStrategy implements LockTimeoutHandler {
 
+    // enum
     NO_OPERATION {
         @Override
         public void handle(LockInfo lockInfo, Lock lock) {
