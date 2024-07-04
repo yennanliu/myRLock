@@ -3,6 +3,10 @@
 > Custom distributed lock based on Redis
 
 ## Code structrue
+
+<details>
+<summary>Code structrue</summary>
+
 ```
 myRLock/src/main/java/com/yen/MyRLock
 ├── annotation
@@ -36,6 +40,8 @@ myRLock/src/main/java/com/yen/MyRLock
     └── ReleaseTimeoutStrategy.java
 ```
 
+</details>
+
 ## Install
 
 ## Quick start
@@ -44,6 +50,9 @@ myRLock/src/main/java/com/yen/MyRLock
 
 ## Deploy built jar
 
+- step 1) setup ~/.m2/settings.xml 
+
+- Step 2) deploy
 ```bash
 # step 1) setup ~/.m2/settings.xml 
 
@@ -52,7 +61,19 @@ myRLock/src/main/java/com/yen/MyRLock
 mvn clean deploy -Dmaven.test.skip  -DaltDeploymentRepository=self-mvn-repo::default::file:/Users/yennanliu/myRLock/myRLock
 ```
 
+- Step 3) use
+
+- Example usage
+```
+<dependency>
+	<groupId>com.yen</groupId>
+	<artifactId>myRLock</artifactId>
+	<version>1.0-SNAPSHOT</version>
+</dependency>
+```
+
 - https://github.com/yennanliu/myLib
+- https://github.com/yennanliu/SpringPlayground/pull/158/commits/fc9d7d30d8c8320a10665dfde5da85637130cc20
 
 
 ## Todo
