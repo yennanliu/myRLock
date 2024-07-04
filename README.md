@@ -43,6 +43,15 @@ myRLock/src/main/java/com/yen/MyRLock
 ## Concept
 
 ## Deploy built jar
+
+```bash
+# step 1) setup ~/.m2/settings.xml 
+
+# step 2) 
+# copy below cmd, and run in IntellJ "maven input", then can deploy updated project to github maven
+mvn clean deploy -Dmaven.test.skip  -DaltDeploymentRepository=self-mvn-repo::default::file:/Users/yennanliu/myRLock/myRLock
+```
+
 - https://github.com/yennanliu/myLib
 
 

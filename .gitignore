@@ -28,3 +28,8 @@ myRLock/.idea
 
 myRLock/target/
 myRLock/myRLock.iml
+
+# built jar
+myRLock/com/
+
+.DS_Store
