@@ -75,6 +75,7 @@ mvn clean package deploy
 ```
 
 - https://github.com/yennanliu/myRLock/packages/2197239
+- https://github.com/yennanliu/hello-package
 
 - https://github.com/yennanliu/myLib
 - https://github.com/yennanliu/SpringPlayground/pull/158/commits/fc9d7d30d8c8320a10665dfde5da85637130cc20
