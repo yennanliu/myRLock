@@ -58,7 +58,9 @@ myRLock/src/main/java/com/yen/MyRLock
 
 # step 2) 
 # copy below cmd, and run in IntellJ "maven input", then can deploy updated project to github maven
-mvn clean deploy -Dmaven.test.skip  -DaltDeploymentRepository=self-mvn-repo::default::file:/Users/yennanliu/myRLock/myRLock
+# mvn clean deploy -Dmaven.test.skip  -DaltDeploymentRepository=self-mvn-repo::default::file:/Users/yennanliu/myRLock/myRLock
+
+mvn clean package deploy
 ```
 
 - Step 3) use
@@ -66,11 +68,13 @@ mvn clean deploy -Dmaven.test.skip  -DaltDeploymentRepository=self-mvn-repo::def
 - Example usage
 ```
 <dependency>
-	<groupId>com.yen</groupId>
-	<artifactId>myRLock</artifactId>
-	<version>1.0-SNAPSHOT</version>
+  <groupId>com.yen</groupId>
+  <artifactId>myrlock</artifactId>
+  <version>1.0.2-SNAPSHOT</version>
 </dependency>
 ```
+
+- https://github.com/yennanliu/myRLock/packages/2197239
 
 - https://github.com/yennanliu/myLib
 - https://github.com/yennanliu/SpringPlayground/pull/158/commits/fc9d7d30d8c8320a10665dfde5da85637130cc20

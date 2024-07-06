@@ -14,7 +14,7 @@
     https://stackoverflow.com/questions/58274843/getting-422unprocessable-entity-when-trying-to-add-maven-package-form-github-re
     -->
     <artifactId>myrlock</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <build>
         <plugins>
             <plugin>
