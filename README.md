@@ -75,6 +75,8 @@ mvn clean deploy -Dmaven.test.skip  -DaltDeploymentRepository=self-mvn-repo::def
 - https://github.com/yennanliu/myLib
 - https://github.com/yennanliu/SpringPlayground/pull/158/commits/fc9d7d30d8c8320a10665dfde5da85637130cc20
 
+- https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry
+
 
 ## Todo
 

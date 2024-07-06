@@ -5,8 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.yen</groupId>
-    <artifactId>myRLock</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <!--
+    NOTE !!! must use lower case for artifactId,
+    or github pkg push will fail
+
+    deploy pkg cmd : mvn clean package deploy
+
+    https://stackoverflow.com/questions/58274843/getting-422unprocessable-entity-when-trying-to-add-maven-package-form-github-re
+    -->
+    <artifactId>myrlock</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
     <build>
         <plugins>
             <plugin>

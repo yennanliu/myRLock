@@ -1,7 +1,6 @@
  package com.yen.MyRLock.core;
 
  import com.yen.MyRLock.annotation.MyRLock;
- import com.yen.MyRLock.annotation.MyRLockKey;
 
  import com.yen.MyRLock.handler.exception.MyRlockInvocationException;
  import com.yen.MyRLock.lock.Lock;
