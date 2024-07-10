@@ -42,6 +42,7 @@
 
      private final Map<String, LockRes> currentThreadLock = new ConcurrentHashMap<>();
 
+     // TODO : check below
      @Around(value = "@annotation(myRlock)")
      public Object around(ProceedingJoinPoint joinPoint, MyRLock myRlock) throws Throwable {
          LockInfo lockInfo = lockInfoProvider.get(joinPoint, myRlock);
@@ -154,11 +155,13 @@
      }
 
      private void cleanUpThreadLocal(String currentLock) {
+         logger.debug("clean up thread local, currentLock = {}", currentLock);
          currentThreadLock.remove(currentLock);
      }
 
-     private String getCurrentLockId(JoinPoint joinPoint, MyRLock klock) {
-         LockInfo lockInfo = lockInfoProvider.get(joinPoint, klock);
+     private String getCurrentLockId(JoinPoint joinPoint, MyRLock myRlock) {
+         logger.debug("clean up thread local, joinPoint = {}, myRlock = {}", joinPoint, myRlock);
+         LockInfo lockInfo = lockInfoProvider.get(joinPoint, myRlock);
          return Thread.currentThread().getId() + lockInfo.getName();
      }
 
