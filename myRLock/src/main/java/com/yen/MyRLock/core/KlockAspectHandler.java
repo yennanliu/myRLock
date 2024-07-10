@@ -29,7 +29,7 @@
 
  @Aspect
  @Component
- @Order(0)
+ @Order(0) // TODO : check it
  public class KlockAspectHandler {
 
      private static final Logger logger = LoggerFactory.getLogger(KlockAspectHandler.class);
@@ -42,16 +42,16 @@
 
      private final Map<String, LockRes> currentThreadLock = new ConcurrentHashMap<>();
 
-     @Around(value = "@annotation(klock)")
-     public Object around(ProceedingJoinPoint joinPoint, MyRLock klock) throws Throwable {
-         LockInfo lockInfo = lockInfoProvider.get(joinPoint, klock);
-         String currentLock = getCurrentLockId(joinPoint, klock);
+     @Around(value = "@annotation(myRlock)")
+     public Object around(ProceedingJoinPoint joinPoint, MyRLock myRlock) throws Throwable {
+         LockInfo lockInfo = lockInfoProvider.get(joinPoint, myRlock);
+         String currentLock = getCurrentLockId(joinPoint, myRlock);
          currentThreadLock.put(currentLock, new LockRes(lockInfo, false));
          Lock lock = lockFactory.getLock(lockInfo);
          boolean lockResult = lock.acquire();
 
          if (!lockResult) {
-             handleLockTimeout(klock, joinPoint);
+             handleLockTimeout(myRlock, joinPoint);
          }
 
          currentThreadLock.get(currentLock).setLock(lock);
@@ -60,30 +60,30 @@
          return joinPoint.proceed();
      }
 
-     @AfterReturning(value = "@annotation(klock)")
-     public void afterReturning(JoinPoint joinPoint, MyRLock klock) throws Throwable {
-         String currentLock = getCurrentLockId(joinPoint, klock);
-         releaseLock(klock, joinPoint, currentLock);
+     @AfterReturning(value = "@annotation(myRlock)")
+     public void afterReturning(JoinPoint joinPoint, MyRLock myRlock) throws Throwable {
+         String currentLock = getCurrentLockId(joinPoint, myRlock);
+         releaseLock(myRlock, joinPoint, currentLock);
          cleanUpThreadLocal(currentLock);
      }
 
-     @AfterThrowing(value = "@annotation(klock)", throwing = "ex")
-     public void afterThrowing(JoinPoint joinPoint, MyRLock klock, Throwable ex) throws Throwable {
-         String currentLock = getCurrentLockId(joinPoint, klock);
-         releaseLock(klock, joinPoint, currentLock);
+     @AfterThrowing(value = "@annotation(myRlock)", throwing = "ex")
+     public void afterThrowing(JoinPoint joinPoint, MyRLock myRlock, Throwable ex) throws Throwable {
+         String currentLock = getCurrentLockId(joinPoint, myRlock);
+         releaseLock(myRlock, joinPoint, currentLock);
          cleanUpThreadLocal(currentLock);
          throw ex;
      }
 
-     private void handleLockTimeout(MyRLock klock, ProceedingJoinPoint joinPoint) throws Throwable {
+     private void handleLockTimeout(MyRLock myRlock, ProceedingJoinPoint joinPoint) throws Throwable {
          if (logger.isWarnEnabled()) {
-             logger.warn("Timeout while acquiring Lock({})", klock.name());
+             logger.warn("Timeout while acquiring Lock({})", myRlock.name());
          }
 
-         if (!StringUtils.isEmpty(klock.customLockTimeoutStrategy())) {
-             handleCustomTimeout(klock.customLockTimeoutStrategy(), joinPoint);
+         if (!StringUtils.isEmpty(myRlock.customLockTimeoutStrategy())) {
+             handleCustomTimeout(myRlock.customLockTimeoutStrategy(), joinPoint);
          } else {
-             klock.lockTimeoutStrategy().handle(lockInfoProvider.get(joinPoint, klock), lockFactory.getLock(lockInfoProvider.get(joinPoint, klock)));
+             myRlock.lockTimeoutStrategy().handle(lockInfoProvider.get(joinPoint, myRlock), lockFactory.getLock(lockInfoProvider.get(joinPoint, myRlock)));
          }
      }
 
