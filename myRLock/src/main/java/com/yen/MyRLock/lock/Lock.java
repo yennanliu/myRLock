@@ -6,4 +6,6 @@ public interface Lock {
   boolean acquire();
 
   boolean release();
+
+  void info();
 }

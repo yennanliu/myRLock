@@ -1,13 +1,18 @@
 package com.yen.MyRLock.lock;
 
+import com.yen.MyRLock.core.LockInfoProvider;
 import com.yen.MyRLock.model.LockInfo;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class ReentrantLock implements Lock {
+
+  private static final Logger logger = LoggerFactory.getLogger(LockInfoProvider.class);
 
   private final LockInfo lockInfo;
   private final RedissonClient redissonClient;
@@ -16,6 +21,7 @@ public class ReentrantLock implements Lock {
   public ReentrantLock(RedissonClient redissonClient, LockInfo lockInfo) {
     this.redissonClient = redissonClient;
     this.lockInfo = lockInfo;
+    logger.debug(String.valueOf(this.lockInfo));
   }
 
   @Override
@@ -45,4 +51,10 @@ public class ReentrantLock implements Lock {
   public String getKey() {
     return this.lockInfo.getName();
   }
+
+  @Override
+  public void info() {
+
+  }
+
 }
