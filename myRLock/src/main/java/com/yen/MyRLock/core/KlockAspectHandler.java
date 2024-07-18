@@ -27,10 +27,28 @@
  import java.util.Objects;
  import java.util.concurrent.ConcurrentHashMap;
 
- @Aspect
- @Component
- @Order(0) // TODO : check it
- public class KlockAspectHandler {
+/**
+ *
+ * @Order(0):
+ *
+ * - Purpose:
+ *     @Order is used to control the order of aspect execution when
+ *     multiple aspects are applied to the same target method or class.
+ *     Aspect execution order can be crucial when you have cross-cutting
+ *     concerns that need to be applied in a specific sequence.
+ *
+ * - Execution Order:
+ * 	 - The value in @Order specifies the order of execution relative to
+ * 	   other aspects. Lower values have higher priority (execute earlier).
+ * 	 - In this case, @Order(0) indicates that this aspect (KlockAspectHandler)
+ * 	   should be one of the first to execute among all aspects with the
+ * 	   default order or higher values.
+ *
+ **/
+@Order(0)
+@Aspect
+@Component
+public class KlockAspectHandler {
 
      private static final Logger logger = LoggerFactory.getLogger(KlockAspectHandler.class);
 
