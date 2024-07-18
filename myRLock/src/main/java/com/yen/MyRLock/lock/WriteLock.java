@@ -1,13 +1,18 @@
 package com.yen.MyRLock.lock;
 
+import com.yen.MyRLock.core.LockInfoProvider;
 import com.yen.MyRLock.model.LockInfo;
 import org.redisson.api.RReadWriteLock;
 import org.redisson.api.RedissonClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class WriteLock implements Lock {
+
+  private static final Logger logger = LoggerFactory.getLogger(LockInfoProvider.class);
 
   private final LockInfo lockInfo;
   private final RedissonClient redissonClient;
@@ -16,6 +21,7 @@ public class WriteLock implements Lock {
   public WriteLock(RedissonClient redissonClient, LockInfo info) {
     this.redissonClient = redissonClient;
     this.lockInfo = info;
+    logger.debug(String.valueOf(this.lockInfo));
   }
 
   @Override
@@ -44,4 +50,10 @@ public class WriteLock implements Lock {
 
     return false;
   }
+
+  @Override
+  public void info() {
+
+  }
+
 }

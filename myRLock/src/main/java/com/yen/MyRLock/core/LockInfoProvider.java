@@ -12,7 +12,7 @@
 
  public class LockInfoProvider {
 
-     private static final String LOCK_NAME_PREFIX = "lock";
+     private static final String LOCK_NAME_PREFIX = "my-rlock";
      private static final String LOCK_NAME_SEPARATOR = ".";
 
      @Autowired
@@ -23,15 +23,15 @@
 
      private static final Logger logger = LoggerFactory.getLogger(LockInfoProvider.class);
 
-     public LockInfo get(JoinPoint joinPoint, MyRLock klock) {
+     public LockInfo get(JoinPoint joinPoint, MyRLock myrLock) {
          MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-         LockType type = klock.lockType();
-         String businessKeyName = businessKeyProvider.getKeyName(joinPoint, klock);
-         String lockName = buildLockName(klock.name(), signature, businessKeyName);
-         long waitTime = getWaitTime(klock);
-         long leaseTime = getLeaseTime(klock);
+         LockType type = myrLock.lockType();
+         String businessKeyName = businessKeyProvider.getKeyName(joinPoint, myrLock);
+         String lockName = buildLockName(myrLock.name(), signature, businessKeyName);
+         long waitTime = getWaitTime(myrLock);
+         long leaseTime = getLeaseTime(myrLock);
 
-         warnIfNoExpiration(klock, lockName, leaseTime);
+         warnIfNoExpiration(myrLock, lockName, leaseTime);
 
          return new LockInfo(type, lockName, waitTime, leaseTime);
      }
@@ -42,7 +42,7 @@
                  businessKeyName;
      }
 
-     private void warnIfNoExpiration(MyRLock klock, String lockName, long leaseTime) {
+     private void warnIfNoExpiration(MyRLock myrLock, String lockName, long leaseTime) {
          if (leaseTime == -1 && logger.isWarnEnabled()) {
              logger.warn("Trying to acquire Lock({}) with no expiration, " +
                      "Klock will keep prolonging the lock expiration while the lock is still held by the current thread. " +
@@ -50,14 +50,14 @@
          }
      }
 
-     private long getWaitTime(MyRLock klock) {
-         return klock.waitTime() == Long.MIN_VALUE ?
-                 klockConfig.getWaitTime() : klock.waitTime();
+     private long getWaitTime(MyRLock myrLock) {
+         return myrLock.waitTime() == Long.MIN_VALUE ?
+                 klockConfig.getWaitTime() : myrLock.waitTime();
      }
 
-     private long getLeaseTime(MyRLock klock) {
-         return klock.leaseTime() == Long.MIN_VALUE ?
-                 klockConfig.getLeaseTime() : klock.leaseTime();
+     private long getLeaseTime(MyRLock myrLock) {
+         return myrLock.leaseTime() == Long.MIN_VALUE ?
+                 klockConfig.getLeaseTime() : myrLock.leaseTime();
      }
 
  }
